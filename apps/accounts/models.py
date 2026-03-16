@@ -1,11 +1,11 @@
+from django.contrib.auth.models import AbstractBaseUser
 from django.db import models
 
-
-from django.contrib.auth.models import AbstractBaseUser
 from .managers import UserManager
 
+
 class User(AbstractBaseUser):
-    email = models.EmailField(verbose_name='email address', max_length=255, unique=True)
+    email = models.EmailField(verbose_name="email address", max_length=255, unique=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     is_verified = models.BooleanField(default=False)
@@ -13,10 +13,9 @@ class User(AbstractBaseUser):
     date_joined = models.DateTimeField(auto_now_add=True)
     last_login = models.DateTimeField(auto_now=True)
 
-
     objects = UserManager()
 
-    USERNAME_FIELD = 'email'
+    USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
     def __str__(self):
@@ -49,8 +48,7 @@ class Profile(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['-created_at']      
-
+        ordering = ["-created_at"]
 
     def __str__(self):
         return self.name or self.user.email
